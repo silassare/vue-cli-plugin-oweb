@@ -1,0 +1,17 @@
+{
+	"name": "vue-cli-plugin-oweb",
+	"version": "1.0.0",
+	"description": "vue-cli plugin to create oweb app",
+	"keywords": [
+		"vue",
+		"cli",
+		"oweb"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/silassare/vue-cli-plugin-oweb.git"
+	},
+	"homepage": "https://github.com/silassare/vue-cli-plugin-oweb#readme",
+	"author": "Emile Silas SARE",
+	"license": "ISC"
+}

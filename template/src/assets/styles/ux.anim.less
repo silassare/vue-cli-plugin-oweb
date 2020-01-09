@@ -1,0 +1,117 @@
+.ux-anim-in {
+	animation-timing-function: ease-out;
+	animation-duration: 350ms
+}
+
+.ux-anim-out {
+	animation-timing-function: ease-in;
+	animation-duration: 225ms
+}
+
+.ux-anim-fade-out {
+	.ux-anim-in;
+
+	opacity: 0;
+	-webkit-animation-duration: 400ms;
+	-webkit-animation-name: fadeout;
+	-moz-animation-duration: 400ms;
+	-moz-animation-name: fadeout;
+	animation-duration: 400ms;
+	animation-name: fadeout
+}
+
+.ux-anim-fade-in {
+	.ux-anim-out;
+
+	animation-duration: 400ms;
+	animation-name: fadein;
+	opacity: 1
+}
+
+.ux-anim-pop-in {
+	.ux-anim-in;
+
+	transform-origin: 50% 50%;
+	transform: scale(1);
+	animation-name: popin;
+	animation-duration: 350ms;
+	opacity: 1
+}
+
+.ux-anim-pop-out {
+	.ux-anim-out;
+
+	transform-origin: 50% 50%;
+	animation-name: fadeout;
+	animation-duration: 100ms;
+	opacity: 0
+}
+
+.ux-anim-bounce {
+	animation: ux-anim-bounce 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28) 1;
+}
+
+@keyframes ux-anim-bounce {
+	from {
+		transform: scale(0);
+	}
+
+	to {
+		transform: scale(1);
+	}
+}
+
+@keyframes fadein {
+	from {
+		opacity: 0
+	}
+
+	to {
+		opacity: 1
+	}
+}
+
+@keyframes fadeout {
+	from {
+		opacity: 1
+	}
+
+	to {
+		opacity: 0
+	}
+}
+
+@keyframes popin {
+	from {
+		transform: scale(.8);
+		opacity: 0
+	}
+
+	to {
+		transform: scale(1);
+		opacity: 1
+	}
+}
+
+@keyframes popout {
+	from {
+		transform: scale(1);
+		opacity: 1
+	}
+
+	to {
+		transform: scale(.8);
+		opacity: 0
+	}
+}
+
+
+@keyframes scroll-left {
+	0% {
+		transform: translateX(100%);
+	}
+
+	100% {
+		transform: translateX(-100%);
+	}
+}
