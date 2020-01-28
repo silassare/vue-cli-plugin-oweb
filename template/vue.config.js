@@ -1,4 +1,4 @@
-module.exports = {
+const configs = {
 	chainWebpack: config => {
 		config
 			.plugin('define')
@@ -15,4 +15,12 @@ module.exports = {
 				return args;
 			})
 	}
+};
+
+if(process.env.NODE_ENV === 'production'){
+	configs.publicPath = "/";
+} else {
+	configs.publicPath = "/";
 }
+
+module.exports = configs;

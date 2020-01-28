@@ -1,7 +1,8 @@
 import { tConfigList } from 'oweb';
 
 const DEV_MODE = process.env.NODE_ENV !== 'production',
-	API_URL = DEV_MODE ? process.env.API_DEV : process.env.API;
+	API_URL = DEV_MODE ? process.env.API_DEV : process.env.API,
+	API_KEY = '__YOUR_OZONE_API_KEY_HERE__';
 
 let w_loc = window.location,
 	w_doc = window.document,
@@ -23,11 +24,10 @@ export default {
 	'!OW_APP_ALLOWED_COUNTRIES': ['bj'],
 
 	OW_APP_DEFAULT_LANG: 'fr',
-	OW_APP_UPDATER_SCRIPT_SRC: '',
 
 	'!OZ_API_KEY_HEADER_NAME': 'x-ozone-api-key',
 	'!OZ_API_REAL_METHOD_HEADER_NAME': 'x-ozone-real-method',
-	'!OZ_API_KEY': 'A326D67A-56396BDC-0CEE96CB-9B849421',
+	'!OZ_API_KEY': API_KEY,
 	'!OZ_API_BASE_URL': API_URL,
 
 	'!OZ_CODE_REG': '^[0-9]{6}$',

@@ -2,7 +2,7 @@ import app from '@/app';
 import { tFileQuality, tI18nData, tI18nPluralize, Utils } from 'oweb';
 import Vue from 'vue';
 import OTelInput from 'o-tel-input';
-import { OZUser, DCQuestion } from '@/gobl.bundle';
+import { OZUser } from '@/gobl.bundle';
 
 export const vuePlugin = function() {
 	Vue.mixin({
@@ -77,10 +77,8 @@ const helpers = {
 	ow_browse_to(route: string) {
 		app.router.browseTo(route);
 	},
-	// ****************************************
-	// *           CUSTOMS METHODS            *
-	// ****************************************
-	ux_user_pic(user: OZUser, quality: 0 | 1 | 2 | 3 = 0) {
+
+	ow_user_pic(user: OZUser, quality: 0 | 1 | 2 | 3 = 0) {
 		let pic = USER_PIC,
 			gender = (user.gender || '').toLowerCase();
 
@@ -92,7 +90,7 @@ const helpers = {
 		return this.ow_file_url(user.getPicid(), quality, pic);
 	},
 
-	ux_custom_data(data: string, def: any = {}) {
+	ow_custom_data(data: string, def: any = {}) {
 		let parsed: any;
 		try {
 			parsed = JSON.parse(data);
@@ -101,11 +99,11 @@ const helpers = {
 		return parsed || def;
 	},
 
-	ux_format_phone(phone: string) {
+	ow_format_phone(phone: string) {
 		return new OTelInput({ number: phone }).getInput(true);
 	},
 
-	ux_format_amount(
+	ow_format_amount(
 		amount: number | string,
 		currency: string = 'XOF',
 		local: string = 'fr-FR'
@@ -116,7 +114,7 @@ const helpers = {
 		});
 	},
 
-	ux_format_date(unix_timestamp: number, format: string = 'MMM Do, h:mm a') {
+	ow_format_date(unix_timestamp: number, format: string = 'MMM Do, h:mm a') {
 		let moment = (window as any).moment;
 
 		moment.locale(app.configs.get('OW_APP_DEFAULT_LANG'));
@@ -124,15 +122,43 @@ const helpers = {
 		return moment(unix_timestamp * 1000).format(format);
 	},
 
-	ux_go_back() {
+	ow_format_date_since(unix_timestamp: number) {
+		let moment = (window as any).moment;
+
+		moment.locale(app.configs.get('OW_APP_DEFAULT_LANG'));
+
+		return moment(unix_timestamp * 1000).fromNow();
+	},
+
+	ow_format_date_input(
+		unix_timestamp: number,
+		format: string = 'YYYY-MM-DDThh:mm'
+	) {
+		let moment = (window as any).moment;
+
+		return moment(unix_timestamp * 1000).format(format);
+	},
+
+	ow_short_text(text: string, len?: number, ellipsis?: string) {
+		len = len || 100;
+		ellipsis = text.length > len ? ellipsis || '...' : '';
+		text = text.substr(0, len);
+		return text.length ? text + ellipsis : '';
+	},
+
+	ow_line_to_br(text: string) {
+		return (text || '').replace(/\\r\\n?|\\n/g, '<br/>');
+	},
+
+	ow_go_back() {
 		app.router.goBack();
 	},
 
-	ux_can_go_back() {
+	ow_can_go_back() {
 		return window.history.length > 1;
 	},
 
-	ux_uuid() {
+	ow_uuid() {
 		return ('' + 1e7 + -1e3 + -4e3 + -8e3 + -1e11).replace(
 			/[018]/g,
 			(c: any) => {
@@ -144,44 +170,10 @@ const helpers = {
 			}
 		);
 	},
-
-	ux_question_data(q: DCQuestion) {
-		let data = {
-			dirty: false,
-			required: false,
-			subLabel: '',
-			typeOptions: {
-				min: 0,
-				max: 0,
-				othersChoice: false,
-				othersChoiceUuid: this.ux_uuid(),
-				choices: [],
-			},
-		};
-
-		try {
-			data = Utils.assign(data, JSON.parse(q.data) || {});
-		} catch (e) {}
-
-		return data;
-	},
-	ux_answer_valid(q: DCQuestion, answer: any) {
-		let options = this.ux_question_data(q);
-
-		if (!options.required && !answer) {
-			return true;
-		}
-
-		return !(
-			!answer ||
-			!answer.isValid ||
-			(options.required && answer.isEmpty)
-		);
-	},
 };
 
-const USER_PIC = require('../assets/img/user_pic.png');
-const USER_MALE = require('../assets/img/user_male.png');
-const USER_FEMALE = require('../assets/img/user_female.png');
+const USER_PIC = require('../assets/images/user-pic.png');
+const USER_MALE = require('../assets/images/user-male.png');
+const USER_FEMALE = require('../assets/images/user-female.png');
 
 export default helpers;
