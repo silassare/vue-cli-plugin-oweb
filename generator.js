@@ -7,7 +7,8 @@ module.exports = api => {
 		scripts: {
 			"serve": "npm run bundle && vue-cli-service serve",
 			"build": "npm run bundle && vue-cli-service build",
-			"bundle": "oweb bundle-components -l && cd ../ && oz db ts-bunlde ./app/src/",
+			"bundle": "APP_DIR=`pwd` && cd ../ && oz db ts-bundle $APP_DIR/src/",
+			"less-watch": "cd ./src/assets/styles/ && less-watch-compiler . . bundle.less ",
 		},
 		dependencies: {
 			"oweb": "*",
@@ -15,7 +16,8 @@ module.exports = api => {
 			"o-tel-input": "*"
 		},
 		devDependencies: {
-			"@types/jquery": "*"
+			"@types/jquery": "*",
+			"less-watch-compiler": "*"
 		}
 	});
 }
