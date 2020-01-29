@@ -11,8 +11,8 @@ module.exports = api => {
 			"less-watch": "cd ./src/assets/styles/ && less-watch-compiler . . bundle.less ",
 		},
 		dependencies: {
-			"oweb": "*",
-			"gobl-utils-ts": "*",
+			"oweb": "silassare/oweb",
+			"gobl-utils-ts": "silassare/gobl-utils-ts",
 			"o-tel-input": "*"
 		},
 		devDependencies: {
