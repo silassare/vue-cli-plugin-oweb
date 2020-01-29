@@ -1,7 +1,7 @@
 import app from '@/app';
 import { tFileQuality, tI18nData, tI18nPluralize, Utils } from 'oweb';
 import Vue from 'vue';
-import OTelInput from 'o-tel-input';
+import OWebTelInput from 'oweb-tel-input';
 import { OZUser } from '@/gobl.bundle';
 
 export const vuePlugin = function() {
@@ -100,7 +100,7 @@ const helpers = {
 	},
 
 	ow_format_phone(phone: string) {
-		return new OTelInput({ number: phone }).getInput(true);
+		return new OWebTelInput({ number: phone }).getInput(true);
 	},
 
 	ow_format_amount(

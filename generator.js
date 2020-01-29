@@ -12,8 +12,8 @@ module.exports = api => {
 		},
 		dependencies: {
 			"oweb": "silassare/oweb",
-			"gobl-utils-ts": "silassare/gobl-utils-ts",
-			"o-tel-input": "silassare/o-tel-input"
+			"oweb-tel-input": "silassare/oweb-tel-input",
+			"gobl-utils-ts": "silassare/gobl-utils-ts"
 		},
 		devDependencies: {
 			"@types/jquery": "*",

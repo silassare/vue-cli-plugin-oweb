@@ -1,15 +1,15 @@
-import OTelInput from 'o-tel-input';
+import OWebTelInput from 'oweb-tel-input';
 import { OWebFormValidator } from 'oweb';
 
 OWebFormValidator.addFieldValidators({
 	phone: function(value: any, name: string, fv: OWebFormValidator) {
 		fv.assert(
-			OTelInput.isPhoneNumberPossible(value, true),
+			OWebTelInput.isPhoneNumberPossible(value, true),
 			'OZ_FIELD_PHONE_INVALID'
 		);
-		let t_obj = new OTelInput({ number: value }),
-			phone: string = t_obj.getInput(),
-			cc2: string = t_obj.getCurrentCountry().cc2;
+		let tObj = new OWebTelInput({ number: value }),
+			phone: string = tObj.getInput(),
+			cc2: string = tObj.getCurrentCountry().cc2;
 
 		fv.setField(name, phone.replace(/[ -]/g, ''));
 
