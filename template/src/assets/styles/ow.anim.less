@@ -1,15 +1,15 @@
-.ux-anim-in {
+.ow-anim-in {
 	animation-timing-function: ease-out;
 	animation-duration: 350ms
 }
 
-.ux-anim-out {
+.ow-anim-out {
 	animation-timing-function: ease-in;
 	animation-duration: 225ms
 }
 
-.ux-anim-fade-out {
-	.ux-anim-in;
+.ow-anim-fade-out {
+	.ow-anim-in;
 
 	opacity: 0;
 	-webkit-animation-duration: 400ms;
@@ -20,16 +20,16 @@
 	animation-name: fadeout
 }
 
-.ux-anim-fade-in {
-	.ux-anim-out;
+.ow-anim-fade-in {
+	.ow-anim-out;
 
 	animation-duration: 400ms;
 	animation-name: fadein;
 	opacity: 1
 }
 
-.ux-anim-pop-in {
-	.ux-anim-in;
+.ow-anim-pop-in {
+	.ow-anim-in;
 
 	transform-origin: 50% 50%;
 	transform: scale(1);
@@ -38,8 +38,8 @@
 	opacity: 1
 }
 
-.ux-anim-pop-out {
-	.ux-anim-out;
+.ow-anim-pop-out {
+	.ow-anim-out;
 
 	transform-origin: 50% 50%;
 	animation-name: fadeout;
@@ -47,11 +47,11 @@
 	opacity: 0
 }
 
-.ux-anim-bounce {
-	animation: ux-anim-bounce 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28) 1;
+.ow-anim-bounce {
+	animation: ow-anim-bounce 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28) 1;
 }
 
-@keyframes ux-anim-bounce {
+@keyframes ow-anim-bounce {
 	from {
 		transform: scale(0);
 	}
