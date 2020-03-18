@@ -7,6 +7,8 @@
 	--selection-color-bg: var(--main-color-bg);
 	--selection-color-txt: var(--main-color-txt);
 
+	--freezing-bg: rgba(0, 0, 0, 0.3);
+
 	--page-color-bg: #e5e9ec;
 	--page-color-txt: #4e5e6a;
 
@@ -37,7 +39,8 @@
 	--font-x-small: 0.625rem;
 	--font-small: 0.8rem;
 	--font-normal: 1rem;
-	--font-card-headings: 1.25rem;
+	--font-medium: 1.25rem;
+	--font-card-headings: var(--font-medium);
 	--font-page-headings: 1.563rem;
 	--font-taglines: 1.953rem;
 	--font-sub-headings: 2.441rem;
@@ -79,19 +82,12 @@
 
 @var-screen-min: 260px; /* minimum screen width supported */
 
-@var-screen-xs: 480px;
-@var-screen-sm: 768px;
-@var-screen-md: 992px;
-@var-screen-lg: 1200px;
-@var-screen-xl: 1300px;
-
-@var-screen-xs-min: @var-screen-xs;
-@var-screen-sm-min: @var-screen-sm;
-@var-screen-md-min: @var-screen-md;
-@var-screen-lg-min: @var-screen-lg;
-@var-screen-xl-min: @var-screen-xl;
-
-@var-screen-xs-max: (@var-screen-sm - 1);
-@var-screen-sm-max: (@var-screen-md - 1);
-@var-screen-md-max: (@var-screen-lg - 1);
-@var-screen-lg-max: (@var-screen-xl - 1);
+@var-screen-xs-min: 0;
+@var-screen-xs-max: 576px - 0.02;
+@var-screen-sm-min: 576px;
+@var-screen-sm-max: 768px - 0.02;
+@var-screen-md-min: 768px;
+@var-screen-md-max: 992px - 0.02;
+@var-screen-lg-min: 992px;
+@var-screen-lg-max: 1200px - 0.02;
+@var-screen-xl-min: 1200px;

@@ -7,17 +7,14 @@ module.exports = api => {
 		scripts: {
 			"serve": "npm run bundle && vue-cli-service serve",
 			"build": "npm run bundle && vue-cli-service build",
-			"bundle": "APP_DIR=`pwd` && cd ../ && oz db ts-bundle $APP_DIR/src/",
-			"less-watch": "cd ./src/assets/styles/ && less-watch-compiler . . bundle.less ",
+			"bundle": "APP_DIR=`pwd` && cd ../ && oz db ts-bundle $APP_DIR/src/"
 		},
 		dependencies: {
 			"oweb": "silassare/oweb",
-			"oweb-tel-input": "silassare/oweb-tel-input",
 			"gobl-utils-ts": "silassare/gobl-utils-ts"
 		},
 		devDependencies: {
-			"@types/jquery": "*",
-			"less-watch-compiler": "*"
+			"@types/jquery": "*"
 		}
 	});
 }
