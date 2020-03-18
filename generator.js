@@ -5,7 +5,7 @@ module.exports = api => {
 
 	api.extendPackage({
 		scripts: {
-			"serve": "npm run bundle && vue-cli-service serve",
+			"serve": "npm run bundle && vue-cli-service serve --open",
 			"build": "npm run bundle && vue-cli-service build",
 			"bundle": "APP_DIR=`pwd` && cd ../ && oz db ts-bundle $APP_DIR/src/"
 		},
