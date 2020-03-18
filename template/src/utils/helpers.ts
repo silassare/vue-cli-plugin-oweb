@@ -1,16 +1,22 @@
 import app from '@/app';
-import { tFileQuality, tI18nData, tI18nPluralize, Utils } from 'oweb';
+import {
+	tFileQuality,
+	tI18nData,
+	tI18nPluralize,
+	Utils,
+	OWebApp,
+	OWebTelInput,
+} from 'oweb';
 import Vue from 'vue';
-import OWebTelInput from 'oweb-tel-input';
-import { OZUser } from '@/gobl.bundle';
+import {OZUser} from '@/gobl.bundle';
 
-export const vuePlugin = function() {
+export const vuePlugin = function () {
 	Vue.mixin({
 		methods: helpers,
 	});
 };
 
-const helpers = {
+const defaultHelpers = {
 	i18n(
 		key: string,
 		data: tI18nData = {},
@@ -19,16 +25,22 @@ const helpers = {
 	) {
 		return app.i18n.toHuman(key, data, pluralize, lang);
 	},
-
+	ow_notify_offline(app: OWebApp) {
+		!window.navigator.onLine &&
+		app.view.dialog({
+			type: 'error',
+			text: 'UX_LANG_YOU_ARE_OFFLINE',
+		});
+	},
 	ow_file_url(file: string, quality: tFileQuality = 0, def?: string) {
-		let parts = file.split('_'),
-			url = app.url.get('OZ_SERVER_GET_FILE_URI'),
-			o = '0',
-			file_id = o,
+		let parts    = file.split('_'),
+			url      = app.url.get('OZ_SERVER_GET_FILE_URI'),
+			o        = '0',
+			file_id  = o,
 			file_key = o;
 
 		if (parts.length === 2) {
-			file_id = parts[0];
+			file_id  = parts[0];
 			file_key = parts[1];
 		}
 
@@ -37,12 +49,12 @@ const helpers = {
 		}
 
 		let data: any = {
-			'{oz_file_id}': file_id,
-			'{oz_file_key}': file_key,
+			'{oz_file_id}'     : file_id,
+			'{oz_file_key}'    : file_key,
 			'{oz_file_quality}': quality,
 		};
 
-		Object.keys(data).forEach(function(key) {
+		Object.keys(data).forEach(function (key) {
 			url = url.replace(key, data[key]);
 		});
 
@@ -64,8 +76,8 @@ const helpers = {
 	},
 
 	ow_loop_key(value: any) {
-		const key = '__ow_key_id',
-			type = typeof value;
+		const key  = '__ow_key_id',
+			  type = typeof value;
 
 		if (type === 'object' || type === 'function') {
 			return key in value ? value[key] : (value[key] = Utils.id());
@@ -79,7 +91,7 @@ const helpers = {
 	},
 
 	ow_user_pic(user: OZUser, quality: 0 | 1 | 2 | 3 = 0) {
-		let pic = USER_PIC,
+		let pic    = USER_PIC,
 			gender = (user.gender || '').toLowerCase();
 
 		if (gender === 'male') {
@@ -100,16 +112,16 @@ const helpers = {
 	},
 
 	ow_format_phone(phone: string) {
-		return new OWebTelInput({ number: phone }).getInput(true);
+		return new OWebTelInput({number: phone}).getInput(true);
 	},
 
 	ow_format_amount(
 		amount: number | string,
 		currency: string = 'XOF',
-		local: string = 'fr-FR'
+		local: string    = 'fr-FR'
 	) {
 		return Number(amount).toLocaleString(local, {
-			style: 'currency',
+			style   : 'currency',
 			currency: currency,
 		});
 	},
@@ -140,9 +152,9 @@ const helpers = {
 	},
 
 	ow_short_text(text: string, len?: number, ellipsis?: string) {
-		len = len || 100;
+		len      = len || 100;
 		ellipsis = text.length > len ? ellipsis || '...' : '';
-		text = text.substr(0, len);
+		text     = text.substr(0, len);
 		return text.length ? text + ellipsis : '';
 	},
 
@@ -165,15 +177,19 @@ const helpers = {
 				return (
 					c ^
 					(crypto.getRandomValues(new Uint8Array(1))[0] &
-						(15 >> (c / 4)))
+					 (15 >> (c / 4)))
 				).toString(16);
 			}
 		);
 	},
 };
 
-const USER_PIC = require('../assets/images/user-pic.png');
-const USER_MALE = require('../assets/images/user-male.png');
+const customHelpers = {};
+
+const helpers = {...defaultHelpers, ...customHelpers};
+
+const USER_PIC    = require('../assets/images/user-pic.png');
+const USER_MALE   = require('../assets/images/user-male.png');
 const USER_FEMALE = require('../assets/images/user-female.png');
 
 export default helpers;

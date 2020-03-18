@@ -1,8 +1,8 @@
 import { OWebApp } from 'oweb';
 
 export default (app: OWebApp) => {
-	let event = app.isMobileApp() ? 'deviceready' : 'DOMContentLoaded';
-	let launch = () => {
+	const event = app.isMobileApp() ? 'deviceready' : 'DOMContentLoaded',
+		launch = () => {
 			if (!app.isMobileApp() && document.readyState === 'complete') {
 				deviceReady();
 				return;
