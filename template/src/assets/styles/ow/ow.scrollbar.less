@@ -1,0 +1,21 @@
+.ow-scrollbar {
+	&::-webkit-scrollbar {
+		width: 5px;
+		height: 5px;
+		background-color: var(--scrollbar-bg);
+	}
+
+	&::-webkit-scrollbar-track {
+		background-color: transparent;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: var(--scrollbar-thumb-bg);
+		border: 2px solid transparent;
+		border-radius: 5px;
+	}
+
+	&::-webkit-scrollbar-thumb:hover {
+		background-color: var(--scrollbar-thumb-bg-hover);
+	}
+}

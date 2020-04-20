@@ -1,6 +1,6 @@
 {
 	"name": "vue-cli-plugin-oweb",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "vue-cli plugin to create oweb app",
 	"keywords": [
 		"vue",

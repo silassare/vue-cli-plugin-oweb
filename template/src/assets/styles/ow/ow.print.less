@@ -1,0 +1,34 @@
+@media print {
+	* {
+		-webkit-print-color-adjust: exact;
+	}
+
+	html,
+	body {
+		page-break-after: avoid;
+		page-break-before: avoid;
+	}
+
+	/* custom */
+	body {
+		height: 100%;
+		margin: 0;
+		background-color: var(--print-page-color-bg);
+		color: var(--print-page-color-txt);
+		overflow: visible !important;
+	}
+
+	/* remove automatic pages herders/footers */
+	@page {
+		margin: 0;
+	}
+
+	.ow-print-hide {
+		display: none;
+	}
+
+	.ow-print-page {
+		page-break-after: always;
+		page-break-inside: avoid;
+	}
+}
