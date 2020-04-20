@@ -1,13 +1,19 @@
-import { tRouteTarget, OWebTNet, tRouteStateObject, createApp } from 'oweb';
-import { default as appConfigs } from '@/settings/configs';
-import { default as appUrlList } from '@/settings/url';
-import storeBundle from "@/oweb.bundles";
+import {tRouteTarget, OWebTNet, tRouteStateObject, createApp} from 'oweb';
+import {default as appConfigs} from '@/settings/configs';
+import {default as appUrlList} from '@/settings/url';
 import helpers from './utils/helpers';
+import storeBundle from "@/oweb.bundles";
+import Vue from 'vue';
 
 if (process.env.NODE_ENV === 'production') {
-	console.log = () => undefined;
-	console.warn = () => undefined;
+	console.log   = () => undefined;
+	console.warn  = () => undefined;
 	console.error = () => undefined;
+
+	Vue.config.errorHandler = function () {
+		// this helps debug vue errors in production
+		(window as any).oweb_vue_error = arguments;
+	};
 }
 
 const app = createApp(
@@ -17,7 +23,7 @@ const app = createApp(
 	storeBundle
 );
 
-app.onReady(function() {
+app.onReady(function () {
 	// TODO use entry point for next page after login
 	let entryPoint = location.href;
 	console.log('[App] entry point ->', entryPoint);
@@ -27,13 +33,13 @@ app.onReady(function() {
 		entryPoint = this.router.pathToURL('/').href;
 	}
 
-	const ctx = this,
-		tNet = new OWebTNet(this),
-		next = function(path?: string, state?: tRouteStateObject) {
-			ctx.store.ready = true;
-			ctx.store.splash = false;
-			ctx.router.start(true, path, state);
-		};
+	const ctx  = this,
+		  tNet = new OWebTNet(this),
+		  next = function (path?: string, state?: tRouteStateObject) {
+			  ctx.store.ready  = true;
+			  ctx.store.splash = false;
+			  ctx.router.start(true, path, state);
+		  };
 
 	tNet.on(OWebTNet.EVT_TNET_READY, (state: string) => {
 		switch (state) {
@@ -63,27 +69,26 @@ app.onReady(function() {
 		}
 	}).check();
 })
-	.onShowHomePage(function(options: tRouteStateObject) {
-		this.router.browseTo('/', options, false, true);
-	})
-	.onShowLoginPage(function(options: tRouteStateObject) {
-		this.router.browseTo(
-			'/login',
-			{
-				next: location.href,
-				...options,
-			},
-			false,
-			true
-		);
-	})
-	.onShowRegistrationPage(function(options: tRouteStateObject) {
-		this.router.browseTo('/register', options, false, true);
-	})
-	.onPageNotFound(function(target: tRouteTarget) {
-		(window as any).location = '/';
-	});
+   .onShowHomePage(function (options: tRouteStateObject) {
+	   this.router.browseTo('/', options, false, true);
+   })
+   .onShowLoginPage(function (options: tRouteStateObject) {
+	   this.router.browseTo(
+		   '/login',
+		   {
+			   next: location.href,
+			   ...options,
+		   },
+		   false,
+		   true
+	   );
+   })
+   .onShowRegistrationPage(function (options: tRouteStateObject) {
+	   this.router.browseTo('/register', options, false, true);
+   })
+   .onPageNotFound(function (target: tRouteTarget) {
+	   this.router.browseTo('/');
+   });
 
 (window as any).app = app;
-
 export default app;

@@ -1,4 +1,4 @@
-import { Vue } from 'vue-property-decorator';
+import Vue from 'vue';
 import app from '@/app';
 
 Vue.directive('o-focus', {
@@ -8,8 +8,10 @@ Vue.directive('o-focus', {
 		}
 	},
 });
-
-Vue.directive('o-i18n', {
+(function(i18n) {
+	Vue.directive('o-i18n', i18n);
+	Vue.directive('i18n', i18n);
+})({
 	inserted(el, binding) {
 		binding.value && app.i18n.el(el, binding.value);
 	},

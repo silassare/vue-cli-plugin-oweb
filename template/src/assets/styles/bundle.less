@@ -1,9 +1,11 @@
-@import 'ow.vars.less';
-
-@import 'ow.normalize.less';
-@import 'ow.base.less';
-@import 'ow.responsive.less';
-@import 'ow.anim.less';
-@import 'ow.print.less';
+@import 'ow/ow.less';
 
 @import 'custom.less';
+
+@media (prefers-color-scheme: no-preference), (prefers-color-scheme: light) {
+	@import 'theme.light.less';
+}
+
+@media (prefers-color-scheme: dark) {
+	@import 'theme.dark.less';
+}

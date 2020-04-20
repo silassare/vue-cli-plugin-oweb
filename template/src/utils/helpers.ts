@@ -126,7 +126,7 @@ const defaultHelpers = {
 		});
 	},
 
-	ow_format_date(unix_timestamp: number, format: string = 'MMM Do, h:mm a') {
+	ow_format_date(unix_timestamp: number, format: string = 'Do MMM YYYY, h:mm a') {
 		let moment = (window as any).moment;
 
 		moment.locale(app.configs.get('OW_APP_DEFAULT_LANG'));
